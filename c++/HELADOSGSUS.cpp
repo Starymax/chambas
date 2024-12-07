@@ -147,7 +147,7 @@ void modificacion(Helados a[]){
         num = num - 1;
         if(clave == a[num].clave){
             while(band2 == false){
-                cout<<"Helado "<<a[num].clave<<" de la marca "<<a[num].marca<<endl<<endl;
+                cout<<"Helado "<<a[num].clave<<" de la marca "<<a[num].marca<<"\n"<<"\n";
                 cout<<"Sabor: ";
                 while(band4 == false){
                     cin>>a[num].sabor;
@@ -198,7 +198,7 @@ void modificacion(Helados a[]){
             band = true;
         }
         else{
-            cout<<"Clave incorrecta, volviendo al menu principal. "<<endl<<endl;
+            cout<<"Clave incorrecta, volviendo al menu principal. "<<"\n"<<"\n";
             band = true;
         }
     }
@@ -233,21 +233,21 @@ void existencias(Helados a[], int contador){
     cout<<"Ingrese la cantidad en litros: ";
     cin>>cantidad;
     if(cantidad > -1){
-        cout<<"Helados con menos de "<<cantidad<<" litros:"<<endl<<endl;
+        cout<<"Helados con menos de "<<cantidad<<" litros:"<<"\n"<<"\n";
         for(int i = 0; i < contador; i++){
             if(a[i].litros < cantidad){
-                cout<<"Helado "<<a[i].clave<<" de la marca "<<a[i].marca<<endl;
-                cout<<"Litros disponibles: "<<a[i].litros<<endl;
-                cout<<"Sabor: "<<a[i].sabor<<endl;
-                cout<<"Precio: $"<<a[i].precio<<endl<<endl;
+                cout<<"Helado "<<a[i].clave<<" de la marca "<<a[i].marca<<"\n";
+                cout<<"Litros disponibles: "<<a[i].litros<<"\n";
+                cout<<"Sabor: "<<a[i].sabor<<"\n";
+                cout<<"Precio: $"<<a[i].precio<<"\n"<<"\n";
                 band = true;
             }
         }
         if(band == false)
-            cout<<"No hay helados con menos de "<<cantidad<<" litros."<<endl;
+            cout<<"No hay helados con menos de "<<cantidad<<" litros."<<"\n";
     }
     else{
-        cout<<"Valor de cantidad incorrecto, volviendo al menu pricipal. "<<endl;
+        cout<<"Valor de cantidad incorrecto, volviendo al menu pricipal. "<<"\n";
     }
     cout<<"Presione cualquier tecla y enter para volver. "<<"\n";
         cin>>k;
@@ -260,21 +260,21 @@ void mismamarca(Helados a[], int contador){
     cout<<"Ingrese la marca buscada: ";
     cin>>marca;
     if(contador > 0){
-        cout<<"Helados de la marca "<<marca<<": "<<endl<<endl;
+        cout<<"Helados de la marca "<<marca<<": "<<"\n"<<"\n";
         for(int i = 0; i < contador; i++){
             if(a[i].marca == marca){
-                cout<<"Helado "<<a[i].clave<<endl;
-                cout<<"Litros disponibles: "<<a[i].litros<<endl;
-                cout<<"Sabor: "<<a[i].sabor<<endl;
-                cout<<"Precio: $"<<a[i].precio<<endl<<endl;
+                cout<<"Helado "<<a[i].clave<<"\n";
+                cout<<"Litros disponibles: "<<a[i].litros<<"\n";
+                cout<<"Sabor: "<<a[i].sabor<<"\n";
+                cout<<"Precio: $"<<a[i].precio<<"\n"<<"\n";
                 band = true;
             }
         }
         if(band == false)
-            cout<<"No hay helados de la marca "<<marca<<". "<<endl<<endl;
+            cout<<"No hay helados de la marca "<<marca<<". "<<"\n"<<"\n";
     }
     else{
-        cout<<"Sin existencias, volviendo al menu pricipal. "<<endl;
+        cout<<"Sin existencias, volviendo al menu pricipal. "<<"\n";
     }
     cout<<"Presione cualquier tecla y enter para volver. "<<"\n";
         cin>>k;
@@ -287,21 +287,21 @@ void precio(Helados a[], int contador){
     cout<<"Ingrese el precio minimo buscado: ";
     cin>>precio;
     if(precio > -1){
-        cout<<"Helados con un costo minimo de $"<<precio<<": "<<endl<<endl;
+        cout<<"Helados con un costo minimo de $"<<precio<<": "<<"\n"<<"\n";
         for(int i = 0; i < contador; i++){
             if(a[i].precio > precio){
-                cout<<"Helado "<<a[i].clave<<" de la marca "<<a[i].marca<<endl;
-                cout<<"Litros disponibles: "<<a[i].litros<<endl;
-                cout<<"Sabor: "<<a[i].sabor<<endl;
-                cout<<"Precio: $"<<a[i].precio<<endl<<endl;
+                cout<<"Helado "<<a[i].clave<<" de la marca "<<a[i].marca<<"\n";
+                cout<<"Litros disponibles: "<<a[i].litros<<"\n";
+                cout<<"Sabor: "<<a[i].sabor<<"\n";
+                cout<<"Precio: $"<<a[i].precio<<"\n"<<"\n";
                 band = true;
             }
         }
         if(band == false)
-            cout<<"No hay helados con un precio mayor a $"<<precio<<". "<<endl;
+            cout<<"No hay helados con un precio mayor a $"<<precio<<". "<<"\n";
     }
     else{
-        cout<<"Precio incorrecto, volviendo al menu pricipal. "<<endl;
+        cout<<"Precio incorrecto, volviendo al menu pricipal. "<<"\n";
     }
     cout<<"Presione cualquier tecla y enter para volver. "<<"\n";
         cin>>k;
