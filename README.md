@@ -7,7 +7,7 @@ cd C:/Users/llama/chambas
 chmod +x act.sh
 ./act.sh
 
-### actualizar locales ### //ejecutar en bash//
+### actualizar github ### //ejecutar en bash//
 
 cd C:/Users/llama/chambas
 
