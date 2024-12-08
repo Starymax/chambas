@@ -28,7 +28,7 @@ int longitud(string a){
 struct Helados{
     string marca;
     string sabor;
-    int litros;
+    float litros;
     float precio;
     string clave;
 };
@@ -150,7 +150,6 @@ void modificacion(Helados a[]){
     string clave;
     string respuesta;
     int num;
-    int suma = 0;
     char n;
     bool band = false, band2 = false, band3 = false, band4 = false, band5 = false, band6 = false;
     cout<<"Ingrese la clave del producto a modificar: ";
@@ -244,7 +243,7 @@ void catalogo(Helados a[], int contador){
 // PRODUCTOS CON CANTIDAD MENOR A LA ENTRADA //
 
 void existencias(Helados a[], int contador){
-    int cantidad;
+    float cantidad;
     string k;
     bool band = false;
     cout<<"Ingrese la cantidad en litros: ";
