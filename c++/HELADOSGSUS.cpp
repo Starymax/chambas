@@ -1,16 +1,20 @@
 #include <iostream>
 using namespace std;
 
+// SALIDA DEL MENU //
+
 void menu(){
     cout<<"HELADOS GSUS"<<"\n"<<"\n";
     cout<<"1. Alta del producto."<<"\n";
     cout<<"2. Modificacion de un producto"<<"\n";
     cout<<"3. Mostrar catalogo de productos"<<"\n";
-    cout<<"4. Productos cuya cantidad sea menor a un numero determinado por el usuario"<<"\n";
+    cout<<"4. Productos cuya existencia sea menor a un numero determinado por el usuario"<<"\n";
     cout<<"5. Productos que pertenezcan a una marca en especifico"<<"\n";
     cout<<"6. Productos que cuesten mas de un precio determinado por el usuario"<<"\n";
     cout<<"7. Salir"<<"\n";
 }
+
+// LONGITUD DE CADENAS //
 
 int longitud(string a){
     int i = 0;
@@ -19,6 +23,8 @@ int longitud(string a){
     return i;
 }
 
+// STRUCT DE LOS ELEMENTOS //
+
 struct Helados{
     string marca;
     string sabor;
@@ -26,6 +32,8 @@ struct Helados{
     float precio;
     string clave;
 };
+
+// CONVERTIR ENTERO A CADENA (PARA LA CLAVE) //
 
 void convertirEntero(int numero, char cadena[]) { 
     numero = numero + 1;
@@ -38,6 +46,8 @@ void convertirEntero(int numero, char cadena[]) {
     cadena[1] = numero + '0';
     }
 }
+
+// GENERAR CLAVES //
 
 string generar_clave(Helados a[], int contador){
     string clave = "";
@@ -56,6 +66,8 @@ string generar_clave(Helados a[], int contador){
 
     return clave;
 }
+
+// DAR DE ALTA UN PRODUCTO //   
 
 void alta_producto(Helados a[], int &contador){
     int suma = 0;
@@ -84,7 +96,7 @@ void alta_producto(Helados a[], int &contador){
         cout<<"Sabor: ";
         while(band4 == false){
             cin>>a[contador].sabor;
-            if(longitud(a[contador].sabor) != '\0')
+            if(longitud(a[contador].sabor) != 0)
                 band4 = true;
             else
                 cout<<"Introduce un sabor valido. ";
@@ -132,6 +144,8 @@ void alta_producto(Helados a[], int &contador){
     }
 }
 
+// MODIFICACION DE PRODUCTOS //
+
 void modificacion(Helados a[]){
     string clave;
     string respuesta;
@@ -139,7 +153,7 @@ void modificacion(Helados a[]){
     int suma = 0;
     char n;
     bool band = false, band2 = false, band3 = false, band4 = false, band5 = false, band6 = false;
-    cout<<"Ingrese el codigo del producto a modificar: ";
+    cout<<"Ingrese la clave del producto a modificar: ";
     while(band == false){
         cin>>clave;
         n = clave[4];
@@ -204,6 +218,7 @@ void modificacion(Helados a[]){
     }
 }
 
+// MOSTRAR CATALOGO DE PRODUCTOS //
 
 void catalogo(Helados a[], int contador){
     string k;
@@ -226,6 +241,8 @@ void catalogo(Helados a[], int contador){
         }
 }
 
+// PRODUCTOS CON CANTIDAD MENOR A LA ENTRADA //
+
 void existencias(Helados a[], int contador){
     int cantidad;
     string k;
@@ -244,14 +261,16 @@ void existencias(Helados a[], int contador){
             }
         }
         if(band == false)
-            cout<<"No hay helados con menos de "<<cantidad<<" litros."<<"\n";
+            cout<<"No hay helados con menos de "<<cantidad<<" litros."<<"\n"<<"\n";
     }
     else{
-        cout<<"Valor de cantidad incorrecto, volviendo al menu pricipal. "<<"\n";
+        cout<<"Valor de cantidad incorrecto, volviendo al menu pricipal. "<<"\n"<<"\n";
     }
     cout<<"Presione cualquier tecla y enter para volver. "<<"\n";
         cin>>k;
 }
+
+// PRODUCTOS PERTENECIENTES A UNA MISMA MARCA //
 
 void mismamarca(Helados a[], int contador){
     string marca;
@@ -260,7 +279,7 @@ void mismamarca(Helados a[], int contador){
     cout<<"Ingrese la marca buscada: ";
     cin>>marca;
     if(contador > 0){
-        cout<<"Helados de la marca "<<marca<<": "<<"\n"<<"\n";
+        cout<<"\n"<<"Helados de la marca "<<marca<<": "<<"\n"<<"\n";
         for(int i = 0; i < contador; i++){
             if(a[i].marca == marca){
                 cout<<"Helado "<<a[i].clave<<"\n";
@@ -274,11 +293,13 @@ void mismamarca(Helados a[], int contador){
             cout<<"No hay helados de la marca "<<marca<<". "<<"\n"<<"\n";
     }
     else{
-        cout<<"Sin existencias, volviendo al menu pricipal. "<<"\n";
+        cout<<"Sin existencias, volviendo al menu pricipal. "<<"\n"<<"\n";
     }
     cout<<"Presione cualquier tecla y enter para volver. "<<"\n";
         cin>>k;
 }
+
+// PRODUCTOS CON PRECIO MAYOR A LA ENTRADA //
 
 void precio(Helados a[], int contador){
     float precio;
@@ -287,7 +308,7 @@ void precio(Helados a[], int contador){
     cout<<"Ingrese el precio minimo buscado: ";
     cin>>precio;
     if(precio > -1){
-        cout<<"Helados con un costo minimo de $"<<precio<<": "<<"\n"<<"\n";
+        cout<<"\n"<<"Helados con un costo minimo de $"<<precio<<": "<<"\n"<<"\n";
         for(int i = 0; i < contador; i++){
             if(a[i].precio > precio){
                 cout<<"Helado "<<a[i].clave<<" de la marca "<<a[i].marca<<"\n";
@@ -298,7 +319,7 @@ void precio(Helados a[], int contador){
             }
         }
         if(band == false)
-            cout<<"No hay helados con un precio mayor a $"<<precio<<". "<<"\n";
+            cout<<"No hay helados con un precio mayor a $"<<precio<<". "<<"\n"<<"\n";
     }
     else{
         cout<<"Precio incorrecto, volviendo al menu pricipal. "<<"\n";
@@ -306,6 +327,8 @@ void precio(Helados a[], int contador){
     cout<<"Presione cualquier tecla y enter para volver. "<<"\n";
         cin>>k;
 }
+
+// ELEGIR MENU (REPETIBLE) //
 
 void menu_eleccion(Helados a[], int &contador){
     int opcion;
@@ -362,6 +385,8 @@ void menu_eleccion(Helados a[], int &contador){
         }
     }
 }
+
+// MAIN //
 
 int main(){
     Helados a[50];
