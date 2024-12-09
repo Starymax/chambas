@@ -76,9 +76,10 @@ void alta_producto(Helados a[], int &contador){
     bool band = false;
     while(band == false){
         bool band2 = false, band3 = false, band4 = false, band5 = false, band6 = false;
-        cout<<"Marca: ";
-        while(band2 == false){
-            cin>>a[contador].marca;
+        while(band2 == false){  
+            cout<<"Marca: ";
+            cin.ignore();
+            getline(cin,a[contador].marca);
             if(longitud(a[contador].marca) > 1){
                 if((a[contador].marca[0] >= 'a' && a[contador].marca[0] <= 'z') || (a[contador].marca[0] >= 'A' && a[contador].marca[0] <= 'Z')){
                     if((a[contador].marca[1] >= 'a' && a[contador].marca[1] <= 'z') || (a[contador].marca[1] >= 'A' && a[contador].marca[1] <= 'Z')){
@@ -95,7 +96,8 @@ void alta_producto(Helados a[], int &contador){
         }
         cout<<"Sabor: ";
         while(band4 == false){
-            cin>>a[contador].sabor;
+            cin.ignore();
+            getline(cin,a[contador].sabor);
             if(longitud(a[contador].sabor) != 0)
                 band4 = true;
             else
@@ -128,7 +130,9 @@ void alta_producto(Helados a[], int &contador){
         cout<<"Clave autogenerada: "<<a[contador].clave<<"\n";
         cout<<"[Y/N]: ";
         while(band3 == false){
-            cin>>respuesta;
+            cin.ignore();
+            getline(cin,respuesta);
+            cout<<"\n";
             if(respuesta[0] == 'Y' || respuesta[0] == 'y'){
                 contador = contador + 1;
                 band = true, band3 = true;
@@ -149,21 +153,28 @@ void alta_producto(Helados a[], int &contador){
 void modificacion(Helados a[]){
     string clave;
     string respuesta;
+    string auxsabor;
+    float auxprecio, auxcantidad;
     int num;
     char n;
     bool band = false, band2 = false, band3 = false, band4 = false, band5 = false, band6 = false;
-    cout<<"Ingrese la clave del producto a modificar: ";
     while(band == false){
-        cin>>clave;
+        cout<<"Ingrese la clave del producto a modificar: ";
+        cin.ignore();
+        getline(cin,clave);
         n = clave[4];
         num = n - '0';
         num = num - 1;
         if(clave == a[num].clave){
+            auxsabor = a[num].sabor;
+            auxprecio = a[num].precio;
+            auxcantidad = a[num].litros;
             while(band2 == false){
                 cout<<"Helado "<<a[num].clave<<" de la marca "<<a[num].marca<<"\n"<<"\n";
                 cout<<"Sabor: ";
                 while(band4 == false){
-                    cin>>a[num].sabor;
+                    cin.ignore();
+                    getline(cin,a[num].sabor);
                     if(longitud(a[num].sabor) > 0)
                         band4 = true;
                     else
@@ -195,20 +206,24 @@ void modificacion(Helados a[]){
                 cout<<"Clave: "<<a[num].clave<<"\n";
                 cout<<"[Y/N]: ";
                 while(band3 == false){
-                    cin>>respuesta;
+                    cin.ignore();
+                    getline(cin,respuesta);
+                    cout<<"\n";
                     if(respuesta[0] == 'Y' || respuesta[0] == 'y'){
-                        band2 = true, band3 = true;
+                        band2 = true, band3 = true, band = true;
                     }
                     else{
                         if((respuesta[0] == 'N') || (respuesta[0] == 'n')){
-                            band3 = true;
+                            band2 = true, band3 = true;
+                            a[num].sabor = auxsabor;
+                            a[num].precio = auxprecio;
+                            a[num].litros = auxcantidad;
                         }
                         else
                         cout<<"Ingrese una respuesta valida. "; 
                     }
                 }
             }
-            band = true;
         }
         else{
             cout<<"Clave incorrecta, volviendo al menu principal. "<<"\n"<<"\n";
@@ -231,12 +246,14 @@ void catalogo(Helados a[], int contador){
             cout<<"Precio: $"<<a[i].precio<<"\n"<<"\n";
         }
         cout<<"Presione cualquier tecla y enter para volver. "<<"\n";
-        cin>>k;
+        cin.ignore();
+        getline(cin,k);
     }
     else{
         cout<<"Inventario vacio..."<<"\n"<<"\n";
         cout<<"Presione cualquier tecla y enter para volver. "<<"\n";
-        cin>>k;
+        cin.ignore();
+        getline(cin,k);
         }
 }
 
@@ -263,10 +280,12 @@ void existencias(Helados a[], int contador){
             cout<<"No hay helados con menos de "<<cantidad<<" litros."<<"\n"<<"\n";
     }
     else{
-        cout<<"Valor de cantidad incorrecto, volviendo al menu pricipal. "<<"\n"<<"\n";
+        cout<<"Valor de cantidad incorrecto, volviendo al menu principal. "<<"\n"<<"\n";
     }
-    cout<<"Presione cualquier tecla y enter para volver. "<<"\n";
-        cin>>k;
+    cout<<"Presione cualquier tecla y enter para volver. "<<"\n";{
+        cin.ignore();
+        getline(cin,k);
+    }
 }
 
 // PRODUCTOS PERTENECIENTES A UNA MISMA MARCA //
@@ -276,7 +295,8 @@ void mismamarca(Helados a[], int contador){
     string k;
     bool band = false;
     cout<<"Ingrese la marca buscada: ";
-    cin>>marca;
+    cin.ignore();
+    getline(cin,marca);
     if(contador > 0){
         cout<<"\n"<<"Helados de la marca "<<marca<<": "<<"\n"<<"\n";
         for(int i = 0; i < contador; i++){
@@ -294,8 +314,10 @@ void mismamarca(Helados a[], int contador){
     else{
         cout<<"Sin existencias, volviendo al menu pricipal. "<<"\n"<<"\n";
     }
-    cout<<"Presione cualquier tecla y enter para volver. "<<"\n";
-        cin>>k;
+    cout<<"Presione cualquier tecla y enter para volver. "<<"\n";{
+        cin.ignore();
+        getline(cin,k);
+    }
 }
 
 // PRODUCTOS CON PRECIO MAYOR A LA ENTRADA //
@@ -323,8 +345,10 @@ void precio(Helados a[], int contador){
     else{
         cout<<"Precio incorrecto, volviendo al menu pricipal. "<<"\n";
     }
-    cout<<"Presione cualquier tecla y enter para volver. "<<"\n";
-        cin>>k;
+    cout<<"Presione cualquier tecla y enter para volver. "<<"\n";{
+        cin.ignore();
+        getline(cin,k);
+    }
 }
 
 // ELEGIR MENU (REPETIBLE) //
