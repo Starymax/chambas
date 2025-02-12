@@ -13,3 +13,7 @@ cd C:/Users/llama/chambas
 
 chmod +x loc.sh
 ./loc.sh
+
+### para usar la terminal ###
+
+C:/Users/llama/chambas/c++/2SEMESTRE

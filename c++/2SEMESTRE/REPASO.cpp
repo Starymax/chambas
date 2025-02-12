@@ -21,7 +21,8 @@ int mayor(int a[], int n){
 }
 
 int estaOrdenado(int a[], int n){
-    int i = 0, band = 1;
+    int i = 0;
+    int band = 1;
     int j = a[0];
     while(band == 1 && i < n){
         if(a[i] < j){
