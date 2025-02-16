@@ -23,12 +23,10 @@ int mayor(int a[], int n){
 int estaOrdenado(int a[], int n){
     int i = 0;
     int band = 1;
-    int j = a[0];
-    while(band == 1 && i < n){
-        if(a[i] < j){
+    while(band == 1 && i < n-1){
+        if(a[i] > a[i+1]){
             band = 0;
         }
-        j = a[i];
         i++;
     }
     return band;
