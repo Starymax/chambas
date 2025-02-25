@@ -16,4 +16,4 @@ chmod +x loc.sh
 
 ### para usar la terminal ###
 
-C:/Users/llama/chambas/c++/2SEMESTRE
+cd c++/2SEMESTRE
