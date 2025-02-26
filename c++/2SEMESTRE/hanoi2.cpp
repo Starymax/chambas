@@ -21,18 +21,18 @@ void imprimirtodo(int torre1[], int torre2[], int torre3[], int n1, int n2, int 
     // Imprimir torre 1
     for (int i = 0; i < n; ++i) {
         if (i < n1)
-            std::cout << torre1[i];
+            cout << torre1[i];
         else
-            std::cout << ' ';
+            cout << " ";
     }
-    std::cout << std::endl;
+    cout << endl;
 
     // Imprimir torre 2
     for (int i = 0; i < n; ++i) {
         if (i < n2)
-            std::cout << torre2[i];
+            cout << torre2[i];
         else
-            std::cout << ' ';
+            cout << ' ';
     }
     std::cout << std::endl;
 
@@ -53,7 +53,7 @@ void imprimirtodo(int torre1[], int torre2[], int torre3[], int n1, int n2, int 
 void mover(int origen[], int destino[], int& n1, int& n2, int& n3, int n, int torre1[], int torre2[], int torre3[]) {
     if(n1 <= 0) return;
     int h = origen[n1 - 1];
-    destino[n2] = h;
+    destino[n-n2-1] = h;
     n1--;
     n2++;
     imprimirtodo(torre1, torre2, torre3, n1, n2, n3, n);
