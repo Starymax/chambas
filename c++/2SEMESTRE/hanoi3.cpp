@@ -39,7 +39,7 @@ void imprimirtodo(int torre1[], int torre2[], int torre3[], int n1, int n2, int 
         else 
             discos(0);
     }
-    cout << endl << "____________________________________________" << endl;
+    cout << endl << "*******************************************" << endl;
 }
 
 
@@ -58,11 +58,8 @@ void resolver(int torre1[], int torre2[], int torre3[], int& n1, int& n2, int& n
     }
     else{
         resolver(torre1, torre3, torre2, n1, n3, n2, n - 1, j);
-        imprimirtodo(torre1, torre2, torre3, n1, n2, n3, n, j);
         mover(torre1, torre3, n1, n3, n2, n, torre1, torre2, torre3, j);
-        imprimirtodo(torre1, torre2, torre3, n1, n2, n3, n, j);
         resolver(torre2, torre1, torre3, n2, n1, n3, n - 1, j);
-        imprimirtodo(torre1, torre2, torre3, n1, n2, n3, n, j);
     }
 }
 
@@ -76,6 +73,8 @@ int main(){
     generartorre(torre1, n);
     imprimirtodo(torre1, torre2, torre3, n1, n2, n3, n, j);
     resolver(torre1, torre2, torre3, n1, n2, n3, n, j);
+    int respuesta;
+    cin >> respuesta;
 
     return 0;
 }
