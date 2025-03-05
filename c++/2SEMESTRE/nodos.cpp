@@ -22,5 +22,8 @@ int main(){
     head -> sig = p;
 
     // posicion 3
-    nose :vvv<
+    ap = new nodo;
+    ap -> valor = 8;
+    ap -> sig = NULL;
+    p -> sig = ap;
 }
