@@ -7,11 +7,12 @@ struct Nodo{
 };
 
 bool existeRecursivo(Nodo *n, int valor){
-    if (n!= NULL)
+    if (n!= NULL){
         if (n -> dato == valor)
             return true;
         else 
-            existeRecursivo(n -> siguiente, valor);
+            return existeRecursivo(n -> siguiente, valor);
+    }
     else
         return false;
 }
@@ -69,33 +70,79 @@ void imprimirRecursivo(Nodo *n){
 }
 
 void insertarOrdenado(Nodo *head, int dato){
-    if(dato < head -> siguiente){
-        Nodo *ant = new
-
-                ant -> siguiente = nuevo;   ant = NULL;
-                nuevo -> siguiente = sig;   sig = NULL;
+    if(head == NULL || head -> dato > dato){
+        Nodo *nuevo = new Nodo;
+        nuevo -> dato = head -> dato;
+        if(head -> siguiente == NULL)
+            nuevo -> siguiente = NULL;
+        else
+            nuevo -> siguiente = head -> siguiente;
+        head -> siguiente = nuevo;
+        head -> dato = dato;
+    }
+    else{
+        if(head -> dato > dato && head -> siguiente == NULL){
+            Nodo *nuevo = new Nodo;
+            nuevo -> dato = head -> dato;
+            nuevo -> siguiente = NULL;
+            head -> siguiente = nuevo;
+            head -> dato = dato;
+        }
+        else{
+            if(head -> dato <= dato && (head -> siguiente == NULL || head -> siguiente -> dato > dato)){
+                Nodo *nuevo = new Nodo;
+                nuevo -> dato = dato;
+                if(head -> siguiente == NULL)
+                    nuevo -> siguiente = NULL;
+                else
+                    nuevo -> siguiente = head -> siguiente;
+                head -> siguiente = nuevo;
+            }
+            else
+                insertarOrdenado(head -> siguiente, dato);
+        }
     }
 }
 
-void eliminarNodo(Nodo *n){ //cuando el dato es igual al buscado se elimina, usar auxiliar para apuntar al siguiente nodo antes de eliminarlo
-    aux = ap ->siguiente;
-    delete ap;
+void eliminarNodo(Nodo *&n, int dato){
+    if(dato == n -> dato){
+        Nodo *aux = n;
+        n = n -> siguiente;
+        delete aux;
+        return;
+    }
+    if(dato == n -> siguiente -> dato){
+        if(n -> siguiente -> siguiente == NULL){
+            delete n -> siguiente -> siguiente;
+            n -> siguiente = NULL;
+        }
+        else{
+            Nodo *ap = n -> siguiente;
+            Nodo *aux = ap -> siguiente;
+            delete ap;
+            n -> siguiente = aux;
+        }
+    }
+    else
+        eliminarNodo(n -> siguiente, dato);
 }
+
 
 int main(){
     Nodo *head = NULL;
 
-    insertaRecursivo(head, 5);
-    insertaRecursivo(head, 4);
-    insertaRecursivo(head, 3);
-    insertaRecursivo(head, 2);
     insertaRecursivo(head, 1);
+    insertaRecursivo(head, 2);
+    insertaRecursivo(head, 3);
+    insertaRecursivo(head, 4);
+    insertaRecursivo(head, 5);
     imprimirRecursivo(head);
-    eliminarNodo(head);
-    imprimirRecursivo(head);
-    if(existeRecursivo(head, 6))
+    if(existeRecursivo(head, 2))
         cout << "El elemento si existe." << endl;
     else
         cout << "El elemento no existe." << endl;
+    insertarOrdenado(head, 4);
+    eliminarNodo(head, 4);
+    imprimirRecursivo(head);
     getchar();
 }
