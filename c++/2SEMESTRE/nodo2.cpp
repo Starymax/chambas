@@ -127,22 +127,60 @@ void eliminarNodo(Nodo *&n, int dato){
         eliminarNodo(n -> siguiente, dato);
 }
 
+int posicion(Nodo *head, int dato){
+    if(head -> dato == dato)
+        return 1;
+    else
+        return posicion(head -> siguiente, dato) + 1;
+}
+
+void modificar(Nodo *head, int dato, int nuevoDato){
+    if(head == NULL)
+        cout<< "No existe el elemento";
+    else{
+        if(head -> dato == dato)
+            head -> dato = nuevoDato;
+        else
+            modificar(head -> siguiente, dato, nuevoDato);
+    }
+}
+
+void eliminaDuplicados(Nodo *lista1, Nodo *&lista2){
+    if(lista2 == NULL){
+        lista2 = new Nodo;
+        lista2 -> dato = lista1 -> dato;
+        lista2 -> siguiente = NULL;
+        eliminaDuplicados(lista1, lista2);
+    }
+    else{
+        if(existeRecursivo(lista2, lista1 -> dato))
+            eliminaDuplicados(lista1 -> siguiente, lista2 -> siguiente);
+        else{
+            Nodo *ap = new Nodo;
+            ap -> dato = lista1 -> dato;
+            ap -> siguiente = NULL;
+            lista2 -> siguiente = ap;
+            eliminaDuplicados(lista1 -> siguiente, lista2 -> siguiente);
+        }
+    }
+}
 
 int main(){
     Nodo *head = NULL;
+    Nodo *head2 = NULL;
 
     insertaRecursivo(head, 1);
+    insertaRecursivo(head, 7);
+    insertaRecursivo(head, 5);
     insertaRecursivo(head, 2);
-    insertaRecursivo(head, 3);
-    insertaRecursivo(head, 4);
     insertaRecursivo(head, 5);
     imprimirRecursivo(head);
     if(existeRecursivo(head, 2))
         cout << "El elemento si existe." << endl;
     else
         cout << "El elemento no existe." << endl;
-    insertarOrdenado(head, 4);
-    eliminarNodo(head, 4);
-    imprimirRecursivo(head);
+    cout << posicion(head, 7);
+    eliminaDuplicados(head, head2);
+    imprimirRecursivo(head2);
     getchar();
 }
