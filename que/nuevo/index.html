@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>miamormividamicielomicorason</title>
+</head>
+<body>
+  <link href="https://fonts.googleapis.com/css2?family=Parisienne&display=swap" rel="stylesheet">
+  <div class="rectangle-container">
+    <div class="sobre" onclick="flipCard()">
+        <div class="front">
+            <span class="text1">
+                De: <br>
+                Para:
+            </span>
+            <span class="text2">
+                balentin osea yo <br>
+                &nbsp;&nbsp;&nbsp;la pecosita d mi corazon
+            </span>
+            <img src="sello.png" alt="sellazo" class="imagen">
+        </div>
+        <div class="back">
+          <div class="triangulo triangulo1"></div>
+          <div class="triangulo triangulo2"></div>
+          <div class="triangulo3"></div>
+          <div class="triangulo4"></div>
+          <div class="animacion-corazones" id="animacion-corazones"></div>
+          <div class="hoja-container" onclick="toggleHoja(event)">
+            <div class="hoja">
+              <img src="hoja.jpg" alt="hojaza">
+              <span class="texto-hoja">
+                Do you want to ser my nobia?
+              </span>
+              <span class="sis">
+                sis
+              </span>
+              <span class="non" id="non">
+                non
+              </span>
+            </div>
+            <img src="flor.png" alt="bolaamarilla" class="bolaamarilla" id="bolaamarilla">
+            <img src="casilla.png" alt="Casilla no marcada" id="casilla1" class="casillano" onclick="verificarCasilla(event, this, document.getElementById('casilla2'))">
+            <img src="casilla.png" alt="Casilla no marcada" id="casilla2" class="casillasi" onclick="marcarCasilla(event, this)">
+            <audio id="boom" src="boom.mp3"></audio>
+            <audio id="lengua" src="lengua.mp3"></audio>
+          </div>          
+          <div class="negro"></div>
+        </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+
+</body>
+</html>

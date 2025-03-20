@@ -1,0 +1,325 @@
+body {
+  background-color: #000;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rectangle-container {
+  perspective: 1000px;
+  z-index: 0;
+}
+
+.sobre {
+  width: 450px;
+  height: 275px;
+  background-color: #25a4f8;
+  display: flex;
+  position: relative;
+  font-family: 'Comic Sans MS', 'Comic Sans', cursive;
+  font-size: 95%;
+  transform-style: preserve-3d;
+  transition: transform 0.8s;
+  cursor: pointer;
+  z-index: 0;
+}
+
+.front, .back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 0;
+}
+
+.front {
+  background-color: #25a4f8;
+  z-index: 0;
+}
+
+.back {
+  background-color: #004173;
+  transform: rotateY(180deg);
+  position: relative;
+  z-index: 0;
+}
+
+.triangulo {
+  position: absolute;
+  width: 50px;
+  height: 60px;
+  border-style: solid;
+  z-index: 0;
+}
+
+.triangulo1 {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 227px 138px 226px;
+  border-color: transparent transparent #25a4f8 transparent;
+  position: absolute;
+  bottom: 0px;
+  left: 50%;
+  transform: translateX(-50%);
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  pointer-events: auto;
+  z-index: 4;
+}
+
+@keyframes abrirTriangulo {
+  0% {
+    transform: translateX(-50%) rotateX(0deg);
+  }
+  100% {
+    transform: translateX(-50%) rotateX(-180deg);
+  }
+}
+
+@keyframes abrirTriangulo {
+  0% {
+      transform: translateX(-50%) rotateX(0deg);
+  }
+  100% {
+      transform: translateX(-50%) rotateX(180deg);
+  }
+}
+
+.triangulo2 {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 138px 225px 0 225px;
+  border-color: #1d89d1 transparent transparent transparent;
+  position: absolute;
+  top: 0px;
+  left: 50%;
+  transform: translateX(-50%);
+  transform-origin: top;
+  transition: transform 1s ease-in-out;
+  z-index: 0;
+}
+
+.sobre.flipped .triangulo2 {
+  animation: abrirTriangulo 1s forwards;
+}
+
+.text1 {
+  position: absolute;
+  top: 115px;
+  left: 100px;
+  color: #a2d1f0;
+}
+
+.text2 {
+  position: absolute;
+  top: 115px;
+  right: 140px;
+  color: #ffffff;
+}
+
+.imagen {
+  position: absolute;
+  right: 10px;
+  top: 20px;
+  width: 70px;
+}
+
+.sobre.flipped {
+  transform: rotateY(180deg);
+}
+
+.triangulo3 {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 138px 225px 138px 0;
+  border-color: transparent #0979b0 transparent transparent;
+  position: absolute;
+  clip-path: polygon(100% 0%, 0% 50%, 100% 100%);
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  z-index: 4;
+}
+
+.triangulo4 {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 138px 0 138px 225px;
+  border-color: transparent transparent transparent #25a4f8;
+  position: absolute;
+  clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  z-index: 4;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Parisienne&display=swap');
+
+.hoja-container {
+  position: absolute;
+  height: 400px;
+  width: 300px;
+  cursor: pointer;
+  transform: rotate(90deg) translateX(0);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  z-index: 1;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+
+.hoja {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.hoja img {
+  width: 100%; 
+  height: 100%;
+}
+
+.texto-hoja {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  transform: rotate(-90deg) translate(-50%, -50%);
+  color: black;
+  font-family: 'Parisienne', cursive;
+  font-size: 42px;
+  font-weight: bold;
+  text-align: center;
+  pointer-events: none;
+}
+
+.casillano, .casillasi {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  transform: rotate(-90deg);
+  cursor: pointer;
+  z-index: 3;
+}
+
+.casillano {
+  top: 150px;
+  left: 160px;
+}
+
+.casillasi {
+  bottom: 40px;
+  left: 160px;
+}
+
+.hoja-container.salida {
+  transform: rotate(90deg) translateX(-200px);
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.hoja-container.regreso {
+  transform: rotate(90deg) translateX(0);
+  box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.3);
+}
+
+.hoja-container.regreso:hover {
+  transform: rotate(90deg) translateX(-50px);
+  box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.4);
+}
+
+.hoja-container.no-hover:hover {
+  transform: rotate(90deg) translateX(-200px);
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.negro {
+  position: absolute;
+  top: 100%;
+  height: 30px;
+  width: 400px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #000;
+  z-index: 2;
+}
+
+.bolaamarilla {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: rotate(-90deg);
+  height: 70px;
+  width: 100px;
+  z-index: 2;
+}
+
+.sis {
+  position: absolute;
+  bottom: 100px;
+  right: 75px;
+  transform: rotate(-90deg) translate(-50%, -50%);
+  color: black;
+  font-family: 'Parisienne', cursive;
+  font-size: 42px;
+  font-weight: bold;
+  text-align: center;
+  pointer-events: none;
+}
+
+.non {
+  position: absolute;
+  bottom: 95%;
+  left: 42%;
+  transform: rotate(-90deg) translate(-50%, -50%);
+  color: black;
+  font-family: 'Parisienne', cursive;
+  font-size: 42px;
+  width: 150px;
+  height: 50px;
+  font-weight: bold;
+  text-align: left;
+  pointer-events: none;
+  z-index: 4;
+}
+
+.animacion-corazones {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  overflow: visible;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+
+.heart {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background-color: red;
+  clip-path: polygon(50% 50%, 61% 19%, 81% 19%, 100% 38%, 81% 62%, 50% 100%, 19% 62%, 0% 38%, 19% 19%, 39% 19%);
+  animation: fly 4s ease-out forwards;
+  opacity: 0.8;
+}
+
+@keyframes fly {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate(var(--random-x), var(--random-y)) scale(0.5);
+    opacity: 0;
+  }
+}

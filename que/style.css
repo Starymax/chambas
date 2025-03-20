@@ -1,0 +1,237 @@
+body {
+  background-color: #000;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flor {
+  height: 200px;
+  width: 200px;
+  margin: 20px auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: relative;
+  top: -110px;
+  background-color: #000;
+
+  animation: pulsate 20s infinite;
+}
+.text-above,
+.text-below {
+    position: absolute;
+    text-align: center;
+    color: #fff;
+    font-size: 35px;
+}
+
+.text-above {
+    top: -60px; 
+}
+
+.text-below {
+    bottom: -60px; 
+}
+
+@keyframes pulsate {
+  0% {
+      transform: scale(1.5);
+  }
+  50% {
+      transform: scale(1.55);
+  }
+  100% {
+      transform: scale(1.5);
+  }
+}
+  .mid {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    
+    background: radial-gradient(circle, #000, #e05301, #000);
+  
+    z-index: 4;
+  
+    background-size: 5px 5px;
+  
+    filter: drop-shadow(0 0 8px #682600);
+  }
+  
+  .Petal1 {
+    position: absolute;
+    left: 40px;
+    z-index: 3;
+  
+    width: 120px;
+    height: 30px;
+    border-radius: 50%;
+  
+    background: radial-gradient(circle, #ff5e00, #ffbb00);
+  
+    filter: drop-shadow(0 0 5px #e05200);
+  }
+  
+  .Petal1.p1 {
+    transform: rotate(22.5deg);
+  }
+  .Petal1.p2 {
+    transform: rotate(67.5deg);
+  }
+  .Petal1.p3 {
+    transform: rotate(110.5deg);
+  }
+  .Petal1.p4 {
+    transform: rotate(157.5deg);
+  }
+  
+  .Petal2 {
+    position: absolute;
+    left: 0;
+    z-index: 2;
+  
+    width: 200px;
+    height: 40px;
+    border-radius: 50%;
+  
+    background: radial-gradient(circle, #ff5e00, #fbd702);
+  
+    filter: drop-shadow(0 0 5px #e05200);
+  }
+  
+  .Petal2.p2 {
+    transform: rotate(90deg);
+  }
+  .Petal2.p3 {
+    transform: rotate(45deg);
+  }
+  
+  .Petal2.p4 {
+    transform: rotate(135deg);
+  }
+  
+  .Petal3 {
+    position: absolute;
+    left: 0px;
+    z-index: 1;
+  
+    width: 200px;
+    height: 40px;
+    border-radius: 50%;
+  
+    background: radial-gradient(circle, #ff5e00, #fbd702);
+  
+    filter: drop-shadow(0 0 2px #fbd702);
+  }
+  .Petal3.p1 {
+    transform: rotate(22.5deg);
+  }
+  .Petal3.p2 {
+    transform: rotate(67.5deg);
+  }
+  .Petal3.p3 {
+    transform: rotate(110.5deg);
+  }
+  .Petal3.p4 {
+    transform: rotate(157.5deg);
+  }
+
+
+.corazon{
+  position: fixed;
+  bottom: -150px;
+  right: 40px;
+  width: 60px;
+  height: 60px;
+  background: #d29bfd;
+  transform: rotate(-45deg);
+  box-shadow: -5px 5px 20px #d29bfd;
+  animation: animate .6s linear infinite;
+}
+
+.corazon::before{
+  content: '';
+  position: absolute;
+  top: -50%;
+  width: 60px;
+  height: 60px;
+  background: #d29bfd;
+  border-radius: 50%;
+  box-shadow: -5px -5px 20px #d29bfd;
+}
+
+.corazon::after {
+  content: '';
+  position: absolute;
+  right: -50%;
+  width: 60px;
+  height: 60px;
+  background: #d29bfd;
+  border-radius: 50%;
+  box-shadow: 5px 5px 20px #d29bfd;
+}
+
+@keyframes animate {
+  0% {
+      transform: rotate(-30deg) scale(1.07);
+  }
+  50% {
+      transform: rotate(-30deg) scale(1.0);
+  }
+  100% {
+      transform: rotate(-30deg) scale(0.8);
+  }
+}
+
+
+.corazon2{
+  position: fixed;
+  bottom: -215px;
+  right: 110px;
+  width: 50px;
+  height: 50px;
+  background: #d29bfd;
+  transform: rotate(-45deg);
+  box-shadow: -5px 5px 20px #d29bfd;
+  animation: pulso .6s linear infinite;
+}
+
+.corazon2::before{
+  content: '';
+  position: absolute;
+  top: -50%;
+  width: 50px;
+  height: 50px;
+  background: #d29bfd;
+  border-radius: 50%;
+  box-shadow: -5px -5px 20px #d29bfd;
+}
+
+.corazon2::after {
+  content: '';
+  position: absolute;
+  right: -50%;
+  width: 50px;
+  height: 50px;
+  background: #d29bfd;
+  border-radius: 50%;
+  box-shadow: 5px 5px 20px #d29bfd;
+}
+
+@keyframes pulso {
+  0% {
+      transform: rotate(-90deg) scale(1.07);
+  }
+  50% {
+      transform: rotate(-90deg) scale(1.0);
+  }
+  100% {
+      transform: rotate(-90deg) scale(0.8);
+  }
+}
