@@ -5,7 +5,8 @@ body {
   height: 100vh;
   display: flex;
   align-items: center;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-end;
 }
 
 .rectangle-container {
@@ -14,13 +15,13 @@ body {
 }
 
 .sobre {
-  width: 450px;
-  height: 275px;
+  width: 300px;
+  height: 200px;
   background-color: #25a4f8;
   display: flex;
   position: relative;
-  font-family: 'Comic Sans MS', 'Comic Sans', cursive;
-  font-size: 95%;
+  font-family: 'Comic Neue', 'Comic Sans MS', 'Comic Sans', cursive;
+  font-size: 70%;
   transform-style: preserve-3d;
   transition: transform 0.8s;
   cursor: pointer;
@@ -62,7 +63,7 @@ body {
   width: 0;
   height: 0;
   border-style: solid;
-  border-width: 0 227px 138px 226px;
+  border-width: 0 151px 101px 151px;
   border-color: transparent transparent #25a4f8 transparent;
   position: absolute;
   bottom: 0px;
@@ -95,7 +96,7 @@ body {
   width: 0;
   height: 0;
   border-style: solid;
-  border-width: 138px 225px 0 225px;
+  border-width: 100px 150px 0 150px;
   border-color: #1d89d1 transparent transparent transparent;
   position: absolute;
   top: 0px;
@@ -112,15 +113,15 @@ body {
 
 .text1 {
   position: absolute;
-  top: 115px;
-  left: 100px;
+  top: 85px;
+  left: 70px;
   color: #a2d1f0;
 }
 
 .text2 {
   position: absolute;
-  top: 115px;
-  right: 140px;
+  top: 85px;
+  right: 84px;
   color: #ffffff;
 }
 
@@ -139,7 +140,7 @@ body {
   width: 0;
   height: 0;
   border-style: solid;
-  border-width: 138px 225px 138px 0;
+  border-width: 100px 150px 100px 0;
   border-color: transparent #0979b0 transparent transparent;
   position: absolute;
   clip-path: polygon(100% 0%, 0% 50%, 100% 100%);
@@ -153,7 +154,7 @@ body {
   width: 0;
   height: 0;
   border-style: solid;
-  border-width: 138px 0 138px 225px;
+  border-width: 100px 0 100px 151px;
   border-color: transparent transparent transparent #25a4f8;
   position: absolute;
   clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
@@ -167,8 +168,8 @@ body {
 
 .hoja-container {
   position: absolute;
-  height: 400px;
-  width: 300px;
+  height: 275px;
+  width: 175px;
   cursor: pointer;
   transform: rotate(90deg) translateX(0);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -192,12 +193,12 @@ body {
 
 .texto-hoja {
   position: absolute;
-  top: 0px;
+  top: 10px;
   left: 0px;
   transform: rotate(-90deg) translate(-50%, -50%);
   color: black;
   font-family: 'Parisienne', cursive;
-  font-size: 42px;
+  font-size: 30px;
   font-weight: bold;
   text-align: center;
   pointer-events: none;
@@ -205,25 +206,25 @@ body {
 
 .casillano, .casillasi {
   position: absolute;
-  width: 40px;
-  height: 40px;
+  width: 25px;
+  height: 25px;
   transform: rotate(-90deg);
   cursor: pointer;
   z-index: 3;
 }
 
 .casillano {
-  top: 150px;
-  left: 160px;
+  top: 100px;
+  left: 85px;
 }
 
 .casillasi {
-  bottom: 40px;
-  left: 160px;
+  bottom: 25px;
+  left: 85px;
 }
 
 .hoja-container.salida {
-  transform: rotate(90deg) translateX(-200px);
+  transform: rotate(90deg) translateX(-150px);
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
 }
 
@@ -238,7 +239,7 @@ body {
 }
 
 .hoja-container.no-hover:hover {
-  transform: rotate(90deg) translateX(-200px);
+  transform: rotate(90deg) translateX(-150px);
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
 }
 
@@ -255,22 +256,22 @@ body {
 
 .bolaamarilla {
   position: absolute;
-  top: 50%;
+  top: 45%;
   right: 10px;
   transform: rotate(-90deg);
-  height: 70px;
-  width: 100px;
+  height: 45px;
+  width: 60px;
   z-index: 2;
 }
 
 .sis {
   position: absolute;
-  bottom: 100px;
-  right: 75px;
+  bottom: 57px;
+  right: 52px;
   transform: rotate(-90deg) translate(-50%, -50%);
   color: black;
   font-family: 'Parisienne', cursive;
-  font-size: 42px;
+  font-size: 24px;
   font-weight: bold;
   text-align: center;
   pointer-events: none;
@@ -278,13 +279,13 @@ body {
 
 .non {
   position: absolute;
-  bottom: 95%;
-  left: 42%;
+  bottom: 92%;
+  left: 46%;
   transform: rotate(-90deg) translate(-50%, -50%);
   color: black;
   font-family: 'Parisienne', cursive;
-  font-size: 42px;
-  width: 150px;
+  font-size: 24px;
+  width: 100px;
   height: 50px;
   font-weight: bold;
   text-align: left;
@@ -323,3 +324,4 @@ body {
     opacity: 0;
   }
 }
+
