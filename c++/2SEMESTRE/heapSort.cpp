@@ -13,7 +13,7 @@ void heapify(int array[], int sizeHeap, int parentIndex){
     int rightChildIndex = 2 * parentIndex + 2;
     if(leftChildIndex < sizeHeap && array[leftChildIndex] > array[larger])
         larger = leftChildIndex;
-    if(rightChildIndex < sizeHeap && array[leftChildIndex] > array[larger])
+    if(rightChildIndex < sizeHeap && array[rightChildIndex] > array[larger])
         larger = rightChildIndex;
     if(larger != parentIndex){
         swap(array[parentIndex], array[larger]);
