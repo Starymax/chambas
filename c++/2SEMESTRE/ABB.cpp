@@ -21,22 +21,36 @@ bool esHoja(Nodo *raiz){
         return false;
 }
 
-int buscar(Nodo *raiz, int elemento){
-    Nodo *actual = raiz;
-    while(!vacio(actual)){
-        if(elemento == actual -> elemento)
-            return true;
-        else if(elemento < actual -> elemento)
-            actual = actual -> izq;
-        else if(elemento > actual -> elemento)
-            actual = actual -> dcha;
+void buscar(Nodo *raiz, int elemento, Nodo *&actual, Nodo *&anterior){
+    bool encontrado = false;
+    anterior = NULL;
+    actual = raiz;
+
+    while (!encontrado && actual != NULL){
+        if (actual->elemento == elemento){
+            encontrado = true;
+        } else {
+            anterior = actual;
+            if (actual->elemento > elemento){
+                actual = actual->izq;
+            } else{
+                actual = actual->dcha;
+            }
+        }
     }
-    return false;
+
+    if (!encontrado) {
+        cout << "No existe " << elemento << endl;
+    } else {
+        cout << elemento << " existe" << endl;
+    }
 }
 
 void insertar(Nodo *&raiz, int elemento){
-    Nodo *nuevo = NULL, *actual = NULL, *anterior = NULL;
-    buscar(raiz, elemento);
+    Nodo *nuevo = NULL;
+    Nodo *actual = NULL;
+    Nodo *anterior = NULL;
+    buscar(raiz, elemento, actual, anterior);
     if(actual != NULL)
         cout<<"duplicao"<< endl;
     else{
@@ -64,11 +78,12 @@ void eliminar(Nodo *raiz, int dato){
     while((!vacio(actual)) && (termina != true)){
         if(dato == actual -> elemento){
             if(esHoja(actual)){
-                if(padre != NULL)
+                if(padre != NULL){
                     if(padre -> dcha == actual)
                         padre -> dcha = NULL;
                     else if(padre -> izq == actual)
                         padre -> izq = NULL;
+                }
                 delete actual;
                 actual = NULL;
                 termina = true;
@@ -77,12 +92,6 @@ void eliminar(Nodo *raiz, int dato){
                 padre = actual;
                 if(actual -> dcha == NULL){
                     nodo = actual -> izq;
-                    while(nodo -> izq != NULL){
-                        padre = nodo;
-                        nodo = nodo -> izq;
-                    }
-                }
-                else{
                     while(nodo -> izq != NULL){
                         padre = nodo;
                         nodo = nodo -> izq;
@@ -99,29 +108,29 @@ void eliminar(Nodo *raiz, int dato){
                 actual -> elemento = nodo -> elemento;
                 nodo -> elemento = aux;
                 actual = nodo;
+            }
+        }
+        else{
+            padre = actual;
+            if(dato > actual -> elemento)
+                actual = actual -> dcha;
+            else
+                actual = actual -> izq;
         }
     }
-    else{
-        padre = actual;
-        if(dato > actual -> elemento)
-            actual = actual -> dcha;
-        else
-            actual = actual -> izq;
-        }
-    }
-}   
+}
 
 void inorden(Nodo *raiz){
     if(raiz!= NULL){
         inorden(raiz->izq);
-        cout<<" "<<raiz->dato;
+        cout<<" "<<raiz->elemento;
         inorden(raiz->dcha);
     }
 }
 
 void preorden(Nodo *raiz){
     if(raiz!= NULL){
-        cout<<" "<<raiz->dato;
+        cout<<" "<<raiz->elemento;
         preorden(raiz->izq);
         preorden(raiz->dcha);
     }
@@ -131,7 +140,7 @@ void postorden(Nodo *raiz){
     if(raiz!= NULL){
         postorden(raiz->izq);
         postorden(raiz->dcha);
-        cout<<" "<<raiz->dato;
+        cout<<" "<<raiz->elemento;
     }
 }
 
@@ -145,9 +154,9 @@ void contarNodos(Nodo *raiz, int &cont){
 
 void auxAltura(Nodo *nodo, int a, int &altura){
     if(nodo -> izq)
-        auxAltura(nodo, a+1, altura);
+        auxAltura(nodo -> izq, a+1, altura);
     if(nodo -> dcha)
-        auxAltura(nodo, a+1, altura);
+        auxAltura(nodo -> dcha, a+1, altura);
     if(esHoja(nodo) && a > altura)
         altura = a;
 }
@@ -159,5 +168,38 @@ int alturaArbol(Nodo *raiz){
 }
 
 int main(){
+    Nodo *raiz = NULL;
+    int cont = 0;
+
+    insertar(raiz, 50);
+    insertar(raiz, 30);
+    insertar(raiz, 70);
+    insertar(raiz, 20);
+    insertar(raiz, 40);
+    insertar(raiz, 60);
+    insertar(raiz, 80);
+
+    cout << "inorden:";
+    inorden(raiz);
+    cout << endl;
+
+    cout << "preorden:";
+    preorden(raiz);
+    cout << endl;
+
+    cout << "postorden:";
+    postorden(raiz);
+    cout << endl;
+
+    eliminar(raiz, 30);
+    cout << "inorden eliminado:";
+    inorden(raiz);
+    cout << endl;
+
+    contarNodos(raiz, cont);
+    cout << "cantidad de nodos: " << cont << endl;
+
+    cout << "altura del arbol: " << alturaArbol(raiz) << endl;
+
     return 0;
 }
