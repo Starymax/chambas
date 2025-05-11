@@ -14,42 +14,46 @@ void inicializar(Palindromo *&tope, Palindromo *&frente){
         Palindromo *aux = new Palindromo;
         aux -> letra = letra;
         aux -> sig = NULL;
-        frente = aux;
-        aux -> sig = tope;
+        if(frente == NULL)
+            frente = aux;
+        else
+            aux -> sig = tope;
         tope = aux;
         inicializar(tope, frente -> sig);
     }
 }
 
+void imprimir(Palindromo *frente){
+    cout<< frente -> letra;
+    imprimir(frente-> sig);
+}
+
 int contador(Palindromo *frente){
+    if(frente == NULL)
+        return 0;
     return 1 + contador(frente->sig);
 }
 
-void esPalindromo(Palindromo *&frente, Palindromo *&tope, int n){
-    if(n>0){
-        if(frente -> letra != tope -> letra){
-            cout << "no es palindrom";
-        }
-        else{
-            cout << frente -> letra;
-            cout << tope -> letra;
-            Palindromo *aux = frente;
-            frente = frente->sig;
-            delete aux;
-            aux = tope;
-            tope = tope -> sig;
-            delete aux;
-            esPalindromo(frente, tope, n-1);
-        }
-    } else{
-        cout << "sies palindromo";
-    }
+void esPalindromo(Palindromo *frente, Palindromo *tope, int n, int valor){
+    if (frente->letra == tope->letra)
+        valor = 0;
+    esPalindromo(frente->sig, tope->sig, n - 1, valor);
 }
+
 
 int main(){
     Palindromo *frente = NULL;
     Palindromo *tope = NULL;
+    int valor = 1;
+    cout << "ingrese la palabra y termine con un punto '.':" << endl;
     inicializar(tope, frente);
-    esPalindromo(frente, tope, contador(frente)/2);
+    imprimir(frente);
+    imprimir(tope);
+    esPalindromo(frente, tope, contador(frente)/2, valor);
+    if(valor == 1)
+        cout << "sies palindromo" << endl;
+    else
+        cout << "noes palindromo" << endl;
+    getchar();
     return 0;
 }

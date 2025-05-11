@@ -64,7 +64,7 @@ int main(){
     imprimir(base, n);
     cout << "Coeficiente: ";
     cin >> coef;
-    cout << "Exponiente: ";
+    cout << "Exponente: ";
     cin >> exp;
     insertar(base, exp, coef, n);
     imprimir(base, n);
