@@ -1,28 +1,36 @@
 #include <iostream>
 using namespace std;
 
+struct Nodo{
+    int indice;
+    Nodo *izq;
+    Nodo *dcha;
+};
 
-void insertarOrdenado(Nodo *head, int dato){
-    if(dato < head -> siguiente){
-        Nodo *ant = new
-
-                ant -> siguiente = nuevo;   ant = NULL;
-                nuevo -> siguiente = sig;   sig = NULL;
+Nodo* insertar(int &arr[], int indice, int inicio, int fin){
+}
+Nodo* construir(int arr[], int inicio, int fin){
+    Nodo *nodo = new Nodo;
+    nodo -> inicio = inicio;
+    nodo -> fin = fin;
+    nodo -> izq = NULL;
+    nodo -> dcha = NULL;
+    if(inicio == fin){
+        nodo -> suma = arr[inicio];
+        return nodo;
     }
+    int medio = (inicio + fin) / 2;
+    nodo -> izq = construir(arr, inicio, medio);
+    nodo -> dcha = construir(arr, medio + 1, fin);
+    nodo -> suma = nodo -> izq -> suma + nodo -> dcha -> suma;
+    return nodo;
 }
 
-
-
-int main() {
-    int n = 3; // Número de discos
-    int torre1[] = {3, 2, 1}; // Inicialización de la primera torre
-    int torre2[] = {0, 0, 0}; // Inicialización de la segunda torre
-    int torre3[] = {0, 0, 0}; // Inicialización de la tercera torre
-    int n1 = 3, n2 = 0, n3 = 0;
-
-    mover(torre1, torre3, n1, n3, n2, n, torre1, torre2, torre3);
-    mover(torre1, torre2, n1, n2, n3, n, torre1, torre2, torre3);
-    imprimirtodo(torre1, torre2, torre3, n1, n2, n3, n);
-
-    return 0;
+int sumar(Nodo *nodo, int ini, int fin){
+    if(nodo == NULL || ini > nodo -> inicio || fin < nodo -> fin)
+        return 0;
+    if(ini == nodo -> incio && nodo -> fin == fin)
+        return nodo -> suma;
+    return sumar(nodo -> izq, ini, fin) + sumar(nodo -> dcha, ini, fin);
 }
+
