@@ -190,11 +190,11 @@ int main(){
                 cout << endl << "arbol: " << endl;
                 imprimir(raiz);
                 break;
-            case 8:
+            case 0:
                 cout << "saliendo..." << endl;
                 break;
         }
-    }while (opcion != 8);
+    }while (opcion != 0);
 
     return 0;
 }
