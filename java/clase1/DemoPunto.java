@@ -1,7 +1,5 @@
 package clase1;
 
-import java.util.Scanner;
-
 public class DemoPunto{
     public static void main(String[] args){
         System.out.println("hola");
