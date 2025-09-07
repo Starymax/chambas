@@ -24,6 +24,6 @@ public class DemoPunto{
         Scanner sc = new Scanner(System.in);
         int x = sc.nextInt();
         System.out.println(x);
-        System.out.println(toString());
+        System.out.println(p.toString());
     }
 }

@@ -35,4 +35,12 @@ public class Persona{
     public void setNombre(String nombre){
         this.nombre = nombre;
     }
+    public void setEdad(int edad){
+        this.edad = edad;
+        if(edad >= 18)
+            this.mayor = true;
+    }
+    public void setAltura(int altura){
+        this.altura = altura;
+    }
 }
