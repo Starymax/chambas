@@ -7,9 +7,9 @@ public class Punto{
     public Punto(){
         x = y = 0;
     }
-    public Punto(int x_, int y_){
-        x = x_;
-        y = y_;
+    public Punto(int x, int y){
+        this.x = x;
+        this.y = y;
     }
     public int leerX(){
         return x;
@@ -22,5 +22,21 @@ public class Punto{
     }
     public void fijarY(int valorY){
         y = valorY;
+    }
+    public void mueveDcha(int x){
+        this.x = this.x + x;
+    }
+    public void mueveArr(int y){
+        this.y = this.y + y;
+    }
+    public double distancia(int coordX, int coordY){
+        int x = coordX - this.x;
+        int y = coordY - this.y;
+        int d = (x * x) + (y * y);
+        return Math.sqrt(d);
+    }
+    @Override
+    public String toString(){
+        return "las coordenadas del pinto son (" + this.x + ", " + this.y + ")";
     }
 }
