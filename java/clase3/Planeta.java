@@ -54,14 +54,4 @@ public class Planeta{
     public double densidad(){
         return this.masa/this.volumen;
     }
-    public void imprimir(){
-        System.out.println("Planeta: " + this.nombre);
-        System.out.println("Satelites: " + this.satelites);
-        System.out.println("Masa: " + this.masa);
-        System.out.println("Volumen: " + this.volumen);
-        if(this.observable)
-            System.out.println("Es observable a simple vista");
-        else    System.out.println("No es observable a simple vista");
-        System.out.println("Densidad: " + densidad());
-    }
 }
