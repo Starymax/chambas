@@ -9,7 +9,7 @@ public class PersonaMain {
         System.out.println("Ingrese la edad de la Persona: ");
         int edad = sc.nextInt();
         System.out.println("Ingrese la altura de la persona: ");
-        int altura = sc.nextInt();
+        float altura = sc.nextFloat();
         sc.nextLine();
         Persona p = new Persona(nombre, edad, altura);
         return p;

@@ -1,11 +1,19 @@
 {
   "version": "0.2.0",
   "configurations": [
+
     {
       "type": "java",
       "name": "PersonaMain",
       "request": "launch",
       "mainClass": "clase2.PersonaMain",
+      "projectName": "chambas_36275bbe"
+    },
+    {
+      "type": "java",
+      "name": "PlanetaMain",
+      "request": "launch",
+      "mainClass": "clase3.PlanetaMain",
       "projectName": "chambas_36275bbe"
     },
     {

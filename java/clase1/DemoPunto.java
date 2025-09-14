@@ -25,5 +25,6 @@ public class DemoPunto{
         int x = sc.nextInt();
         System.out.println(x);
         System.out.println(p.toString());
+        sc.close();
     }
 }

@@ -40,7 +40,7 @@ public class Persona{
         if(edad >= 18)
             this.mayor = true;
     }
-    public void setAltura(int altura){
+    public void setAltura(float altura){
         this.altura = altura;
     }
 }
