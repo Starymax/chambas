@@ -1,7 +1,13 @@
 {
   "version": "0.2.0",
   "configurations": [
-
+    {
+      "type": "java",
+      "name": "BibliotecaMain",
+      "request": "launch",
+      "mainClass": "clase4.BibliotecaMain",
+      "projectName": "chambas_36275bbe"
+    },
     {
       "type": "java",
       "name": "PersonaMain",

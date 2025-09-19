@@ -15,4 +15,13 @@ public class Libros {
         this.autor = autor;
         this.isbn = isbn;
     }
+    public String getNombre(){
+        return this.nombre;
+    }
+    public String getAutor(){
+        return this.autor;
+    }
+    public int getIsbn(){
+        return this.isbn;
+    }
 }
