@@ -21,6 +21,13 @@ public class BibliotecaMain {
         }
         ff.newLibro(nombre, autor, isbn);
     }
+    public int contarLibros(){
+        int num = 0;
+        for(Estante e: this.estantes){
+            num = num + e.getColeccion().size();
+        }
+        return num;
+    }
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
         BibliotecaMain biblioteca = new BibliotecaMain();
@@ -40,7 +47,9 @@ public class BibliotecaMain {
         name = sc.nextLine();
         if(actual.checkLibro(name))
             System.out.println("El libro: " + name + " existe");
-        else System.out.println("El libro: " + name + "no existe");
+        else System.out.println("El libro: " + name + " no existe");
         sc.close();
+
+        System.out.println("la cantidad total de libros en la biblioteca es: " + biblioteca.contarLibros());
     }
 }
