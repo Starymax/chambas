@@ -3,6 +3,20 @@
   "configurations": [
     {
       "type": "java",
+      "name": "EmpresaMain",
+      "request": "launch",
+      "mainClass": "clase6.EmpresaMain",
+      "projectName": "chambas_36275bbe"
+    },
+    {
+      "type": "java",
+      "name": "InmuebleMain",
+      "request": "launch",
+      "mainClass": "clase5.InmuebleMain",
+      "projectName": "chambas_36275bbe"
+    },
+    {
+      "type": "java",
       "name": "BibliotecaMain",
       "request": "launch",
       "mainClass": "clase4.BibliotecaMain",
