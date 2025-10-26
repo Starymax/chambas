@@ -3,6 +3,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "Main",
+      "request": "launch",
+      "mainClass": "clase10.pqt1.Main",
+      "projectName": "chambas_36275bbe"
+    },
+    {
+      "type": "java",
       "name": "Empresa",
       "request": "launch",
       "mainClass": "clase7.Empresa",
