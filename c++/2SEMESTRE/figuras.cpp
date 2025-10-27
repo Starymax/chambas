@@ -26,17 +26,14 @@ else{ if(a != b && pesopluma == 0)
 else{ if(a == b && pesopluma == a)
     cout << "esun triangulo equilatero de area: " << ((pesopluma * pesopluma)/4 * 1.73);
 else{ if(a == b || a == pesopluma || b == pesopluma){
-    int base;
-    int ladoa;
-    if (a==b){base = pesopluma; ladoa = a;}
-    else{ if(a==pesopluma){base = b; ladoa = a;}
-    else {base = pesopluma;
-    ladoa = a;}}
-    cout << "esun triangulo isosceles de area: " << (base * (sqrt((ladoa*ladoa) - (ladoa*ladoa)/4))/2);
+    float x= (a + b + pesopluma) / 2;
+    float area = sqrt(x*(x-a)*(x-b)*(x-pesopluma));
+    cout << "esun triangulo isosceles de area: " << area;
 }
 else{
-    int s = (a + b + pesopluma)/2;
-    cout << "esun triangulo escaleno de area: "<< 2 * sqrt(s*(s - a) * (s - b) * (s - pesopluma) * b);
+    float x= (a + b + pesopluma) / 2;
+    float area = sqrt(x*(x-a)*(x-b)*(x-pesopluma));
+    cout << "esun triangulo escaleno de area: "<< area;
 }}}}}}
 return 0;
 }
