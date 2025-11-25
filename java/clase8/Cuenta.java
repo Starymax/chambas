@@ -29,4 +29,7 @@ public class Cuenta{
             }
         }
     }
+    public String getuserplan(){
+        return userId + plan;
+    }
 }

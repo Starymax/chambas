@@ -45,4 +45,7 @@ public class EmpresaMain {
 
         empresa.mostrarSueldos();
     }
+    public String getname(){
+        return this.nombre;
+    }
 }
