@@ -62,6 +62,7 @@ case 2:
         cout << "esun triangulo escaleno de area: "<< area<< " y de perimetro: " << a + b + pesopluma << endl;
     }}}}}}
     break;
+    
 case 3:
     cout << "hasta la proximaaa";
     break;
