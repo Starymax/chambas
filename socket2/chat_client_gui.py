@@ -74,6 +74,8 @@ class ChatClientGUI:
         self.cola_mensajes = queue.Queue()
         # Cola para updates de userlist (lista de strings)
         self.cola_userlist = queue.Queue()
+        # cola para updates de grouplist
+        self.cola_grouplist = queue.Queue()
 
         # ---- UI conexión ----
         frame_conn = tk.Frame(master)
@@ -107,6 +109,18 @@ class ChatClientGUI:
         tk.Label(frame_users, text="Usuarios conectados").pack()
         self.listbox_users = tk.Listbox(frame_users, height=20, width=20)
         self.listbox_users.pack(fill="y", expand=False)
+
+        # Lista de grupos
+        tk.Label(frame_users, text="Grupos").pack(pady=(10, 0))
+        self.listbox_grupos = tk.Listbox(frame_users, height=10, width=20)
+        self.listbox_grupos.pack(fill="y", expand=False)
+        
+        # Botón crear grupo
+        self.btn_crear_grupo = tk.Button(
+            frame_users, 
+            text="Crear Grupo", 
+            command=self.crear_grupo)
+        self.btn_crear_grupo.pack(pady=5)
 
         # Área de chat
         frame_chat = tk.Frame(frame_main)
@@ -205,6 +219,16 @@ class ChatClientGUI:
                     destino = header.get("to")
                     msg = header.get("message", "")
                     self.cola_mensajes.put(f"{remitente} -> {destino}: {msg}\n")
+                
+                elif mtype == "group_message":
+                    remitente = header.get("from")
+                    grupo = header.get("group")
+                    msg = header.get("message", "")
+                    self.cola_mensajes.put(f"[{grupo}] {remitente}: {msg}\n")
+                
+                elif mtype == "grouplist":
+                    grupos = header.get("groups", [])
+                    self.cola_grouplist.put(grupos)
 
                 elif mtype == "file":
                     remitente = header.get("from")
@@ -271,15 +295,28 @@ class ChatClientGUI:
     # ========= Envío de datos =========
 
     def _obtener_destinatario(self):
-        seleccion = self.listbox_users.curselection()
-        if not seleccion:
-            messagebox.showwarning("Chat", "Selecciona un usuario en la lista para enviarle un mensaje/archivo.")
+        """Obtiene el destinatario (usuario o grupo)"""
+        sel_user = self.listbox_users.curselection()
+        sel_grupo = self.listbox_grupos.curselection()
+        
+        # Verificar que solo uno esté seleccionado
+        if sel_user and sel_grupo:
+            messagebox.showwarning("Chat", "Selecciona SOLO un usuario O un grupo, no ambos.")
             return None
-        usuario = self.listbox_users.get(seleccion[0])
-        if usuario == self.username:
-            if not messagebox.askyesno("Chat", "Seleccionaste tu propio usuario. ¿Quieres continuar?"):
-                return None
-        return usuario
+        
+        if sel_user:
+            usuario = self.listbox_users.get(sel_user[0])
+            if usuario == self.username:
+                if not messagebox.askyesno("Chat", "Seleccionaste tu propio usuario. ¿Quieres continuar?"):
+                    return None
+            return ("user", usuario)
+        
+        if sel_grupo:
+            grupo = self.listbox_grupos.get(sel_grupo[0])
+            return ("group", grupo)
+        
+        messagebox.showwarning("Chat", "Selecciona un usuario o grupo en la lista.")
+        return None
 
     def enviar_texto_evento(self, event):
         self.enviar_texto()
@@ -289,25 +326,37 @@ class ChatClientGUI:
             messagebox.showwarning("Chat", "No estás conectado.")
             return
 
-        destino = self._obtener_destinatario()
-        if not destino:
+        resultado = self._obtener_destinatario()
+        if not resultado:
             return
+        
+        tipo, destino = resultado
 
         texto = self.entry_msg.get().strip()
         if not texto:
             return
 
-        header = {
-            "type": "text",
-            "from": self.username,
-            "to": destino,
-            "message": texto,
-        }
-
+        if tipo == "user":
+            header = {
+                "type": "text",
+                "from": self.username,
+                "to": destino,
+                "message": texto,
+            }
+        elif tipo == "group":
+            header = {
+                "type": "group_text",
+                "from": self.username,
+                "to": destino,
+                "message": texto,
+            }
         try:
             send_frame(self.sock, header)
             # Mostrar en chat local
-            self._log_local(f"Yo -> {destino}: {texto}\n")
+            if tipo == "user":
+                self._log_local(f"Yo -> {destino}: {texto}\n")
+            elif tipo == "group":
+                self._log_local(f"Yo -> [{destino}]: {texto}\n")
         except OSError as e:
             messagebox.showerror("Error", f"No se pudo enviar el mensaje: {e}")
             self.conectado = False
@@ -320,9 +369,11 @@ class ChatClientGUI:
             messagebox.showwarning("Chat", "No estás conectado.")
             return
 
-        destino = self._obtener_destinatario()
-        if not destino:
+        resultado = self._obtener_destinatario()  # ← CAMBIAR NOMBRE
+        if not resultado:
             return
+        
+        tipo, destino = resultado  # ← DESEMPAQUETAR AQUÍ
 
         ruta = filedialog.askopenfilename(title="Selecciona un archivo para enviar")
         if not ruta:
@@ -343,20 +394,30 @@ class ChatClientGUI:
 
         hilo = threading.Thread(
             target=self._enviarthread,
-            args=(ruta, destino, filename, tam),
+            args=(ruta, tipo, destino, filename, tam),  # ← AGREGAR 'tipo'
             daemon=True
         )
         hilo.start()
 
-    def _enviarthread(self, ruta, destino, filename, tam):
+    def _enviarthread(self, ruta, tipo, destino, filename, tam):  # ← AGREGAR 'tipo'
         try:
-            header={
-                "type": "file",
-                "from": self.username,
-                "to": destino,
-                "filename": filename,
-                "filesize": tam,
-            }
+            # Preparar header según tipo
+            if tipo == "user":
+                header = {
+                    "type": "file",
+                    "from": self.username,
+                    "to": destino,
+                    "filename": filename,
+                    "filesize": tam,
+                }
+            elif tipo == "group":
+                header = {
+                    "type": "group_file",  # ← Diferente para grupos
+                    "from": self.username,
+                    "to": destino,
+                    "filename": filename,
+                    "filesize": tam,
+                }
 
             send_frame(self.sock, header)
             
@@ -417,6 +478,15 @@ class ChatClientGUI:
         except queue.Empty:
             pass
 
+        try:
+            while True:
+                grupos = self.cola_grouplist.get_nowait()
+                self.listbox_grupos.delete(0, tk.END)
+                for g in grupos:
+                    self.listbox_grupos.insert(tk.END, g)
+        except queue.Empty:
+            pass
+
         self.master.after(100, self.procesar_colas)
 
     def cerrar(self):
@@ -429,6 +499,90 @@ class ChatClientGUI:
             self.sock.close()
         self.master.destroy()
 
+    def crear_grupo(self):
+        """Abre ventana para crear un grupo"""
+        if not self.conectado:
+            messagebox.showwarning("Chat", "Debes estar conectado para crear un grupo.")
+            return
+        
+        ventana = tk.Toplevel(self.master)
+        ventana.title("Crear Grupo")
+        ventana.geometry("300x400")
+        
+        # Nombre del grupo
+        tk.Label(ventana, text="Nombre del grupo:").pack(pady=5)
+        entry_nombre = tk.Entry(ventana, width=30)
+        entry_nombre.pack(pady=5)
+        
+        # Lista de usuarios con checkboxes
+        tk.Label(ventana, text="Selecciona miembros:").pack(pady=5)
+        
+        frame_checks = tk.Frame(ventana)
+        frame_checks.pack(fill="both", expand=True, padx=10, pady=5)
+        
+        # Crear scrollbar
+        scrollbar = tk.Scrollbar(frame_checks)
+        scrollbar.pack(side="right", fill="y")
+        
+        canvas = tk.Canvas(frame_checks, yscrollcommand=scrollbar.set)
+        canvas.pack(side="left", fill="both", expand=True)
+        scrollbar.config(command=canvas.yview)
+        
+        frame_interior = tk.Frame(canvas)
+        canvas.create_window((0, 0), window=frame_interior, anchor="nw")
+        
+        # Variables para checkboxes
+        check_vars = {}
+        
+        # Obtener usuarios conectados de la listbox
+        usuarios_disponibles = []
+        for i in range(self.listbox_users.size()):
+            user = self.listbox_users.get(i)
+            if user != self.username:  # No incluir a sí mismo
+                usuarios_disponibles.append(user)
+        
+        # Crear checkbox por cada usuario
+        for user in usuarios_disponibles:
+            var = tk.BooleanVar()
+            check_vars[user] = var
+            cb = tk.Checkbutton(frame_interior, text=user, variable=var)
+            cb.pack(anchor="w", padx=5, pady=2)
+        
+        frame_interior.update_idletasks()
+        canvas.config(scrollregion=canvas.bbox("all"))
+        
+        # Botón crear
+        def crear():
+            nombre_grupo = entry_nombre.get().strip()
+            
+            if not nombre_grupo:
+                messagebox.showwarning("Crear Grupo", "Debes escribir un nombre para el grupo.")
+                return
+            
+            # Obtener usuarios seleccionados
+            miembros = [user for user, var in check_vars.items() if var.get()]
+            
+            if not miembros:
+                messagebox.showwarning("Crear Grupo", "Debes seleccionar al menos un miembro.")
+                return
+            
+            # Enviar solicitud al servidor
+            header = {
+                "type": "create_group",
+                "from": self.username,
+                "to": "SERVER",
+                "group_name": nombre_grupo,
+                "members": miembros
+            }
+            
+            try:
+                send_frame(self.sock, header)
+                ventana.destroy()
+                self._log_local(f"[SISTEMA] Solicitud de crear grupo '{nombre_grupo}' enviada\n")
+            except OSError as e:
+                messagebox.showerror("Error", f"No se pudo enviar la solicitud: {e}")
+        
+        tk.Button(ventana, text="Crear Grupo", command=crear).pack(pady=10)
 
 def main():
     root = tk.Tk()
